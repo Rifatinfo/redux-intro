@@ -1,5 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { logger } from "./middlewares.ts/logger";
 
 export const store = configureStore({
-    reducer : {}
+    reducer : {},
+    middleware : (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
 })
