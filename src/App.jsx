@@ -1,17 +1,24 @@
+import { useGetTaskQuery } from "./redux/features/user/userSlice"
 
 
 function App() {
-
+  const {data, isLoading} = useGetTaskQuery(undefined);
+  console.log(data, isLoading);
+  if(isLoading){
+    <p>Loading .....</p>
+  }
+  
   return (
     <>
-      <div class="container">
+      <div>
         <div>
           <h1>Redux Intro Count</h1>
-          <div class="operation">
-            <button>Increment</button>
-            <div>0</div>
-            <button>decrement</button>
-          </div>
+          {!isLoading && data.data.map((book) => <>
+            <div key={book.id}>
+                <p>{book.title}</p>
+                <p>{book.author}</p>
+            </div>
+          </>)}
         </div>
       </div>
     </>
